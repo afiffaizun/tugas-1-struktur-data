@@ -1,0 +1,33 @@
+PROMPT: Program Manajemen Data Mahasiswa dengan Array
+
+Buatkan program Java menggunakan struktur data array (fixed-size array) dengan kapasitas 10 untuk menyimpan data mahasiswa (NIM dan Nama). Program harus memiliki menu interaktif dengan 9 pilihan menu:
+
+1. Data Structure:
+   - Array NIM dengan kapasitas 10 elemen (tipe String)
+   - Array Nama dengan kapasitas 10 elemen (tipe String)
+   - Variable `count` untuk tracking jumlah data yang tersimpan
+
+2. Menu Operasi :
+   - Menu 1: Insert at beginning - Sisipkan data baru di posisi awal (indeks 0), geser data yang sudah ada ke belakang
+   - Menu 2: Insert at given position - Sisipkan data baru di posisi tertentu (0-9), dengan validasi posisi
+   - Menu 3: Insert at end - Tambahkan data baru setelah data terakhir
+   - Menu 4: Delete from beginning - Hapus data di posisi pertama, geser semua data ke depan
+   - Menu 5: Delete given position - Hapus data di posisi tertentu, geser data di belakangnya ke depan
+   - Menu 6: Delete from end - Hapus data terakhir
+   - Menu 7: Delete first occurrence - Cari NIM yang diminta user, hapus data pertama yang cocok
+   - Menu 8: Show data - Tampilkan semua data dalam format tabel (No | NIM | Nama)
+   - Menu 9: Exit - Keluar dari program
+
+3. Requirement:
+   - Setiap operasi insert, variable `count` bertambah 1
+   - Setiap operasi delete, variable `count` berkurang 1
+   - Cek kondisi array penuh sebelum insert
+   - Cek kondisi array kosong sebelum delete
+   - Validasi input posisi (tidak boleh negatif, tidak boleh melebihi batas)
+   - Gunakan Scanner untuk input user
+
+4. Format Output:
+   - Menu ditampilkan dengan format yang rapi dan jelas
+   - Data ditampilkan dalam format tabel dengan header (No | NIM | Nama)
+   - Message feedback untuk setiap operasi (berhasil/gagal)
+   - Informasi posisi tersedia saat insert at position
