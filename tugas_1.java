@@ -1,55 +1,58 @@
+import java.util.Scanner;
+
 public class tugas_1 {
-    static String[] nim = new String[10];
-    static String[] nama = new String[10];
+
+    static final int kapasitas = 10;
+    static String[] nim = new String[kapasitas];
+    static String[] nama = new String[kapasitas];
     static int count = 0;
 
+    static Scanner input = new Scanner(System.in);
+
     public static void main(String[] args) {
-        int choice;
-        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        int pilihan;
 
-        while (true) {
-            displayMenu();
-            System.out.print("Pilih Opsi (1-9): ");
-            choice = scanner.nextInt();
-            scanner.nextLine();
+        do {
+            menu();
+            pilihan = input.nextInt();
+            input.nextLine(); // buang newline
 
-            switch (choice) {
+            switch (pilihan) {
                 case 1:
-                    insertAtBeginning(scanner);
+                    insertBeginning();
                     break;
                 case 2:
-                    insertAtPosition(scanner);
+                    insertAtPosition();
                     break;
                 case 3:
-                    insertAtEnd(scanner);
+                    insertEnd();
                     break;
                 case 4:
-                    deleteFromBeginning();
+                    deleteBeginning();
                     break;
                 case 5:
-                    deleteFromPosition(scanner);
+                    deleteAtPosition();
                     break;
                 case 6:
-                    deleteFromEnd();
+                    deleteEnd();
                     break;
                 case 7:
-                    deleteFirstOccurrence(scanner);
+                    deleteFirstOccurrence();
                     break;
                 case 8:
                     showData();
                     break;
                 case 9:
-                    System.out.println("Program selesai!");
-                    scanner.close();
-                    return;
+                    System.out.println("Keluar dari program...");
+                    break;
                 default:
-                    System.out.println("Menu tidak valid!");
+                    System.out.println("Pilihan tidak valid!");
             }
-        }
+        } while (pilihan != 9);
     }
 
-    static void displayMenu() {
-        System.out.println("\n=========== DATA MAHASISWA ============");
+    static void menu() {
+        System.out.println("\n=== MENU DATA MAHASISWA ===");
         System.out.println("1. Insert at beginning");
         System.out.println("2. Insert at given position");
         System.out.println("3. Insert at end");
@@ -59,166 +62,164 @@ public class tugas_1 {
         System.out.println("7. Delete first occurrence");
         System.out.println("8. Show data");
         System.out.println("9. Exit");
-        System.out.println("==============================p==========");
+        System.out.print("Pilih menu: ");
     }
 
-    static void insertAtBeginning(java.util.Scanner scanner) {
-        if (count >= 10) {
+    // ================= INSERT =================
+
+    static void insertBeginning() {
+        if (count == kapasitas) {
             System.out.println("Array penuh!");
             return;
         }
-        System.out.print("Masukkan NIM: ");
-        String inputNim = scanner.nextLine();
-        System.out.print("Masukkan Nama: ");
-        String inputNama = scanner.nextLine();
+
+        System.out.print("Masukkan NIM  : ");
+        String n = input.nextLine();
+        System.out.print("Masukkan Nama : ");
+        String nm = input.nextLine();
 
         for (int i = count; i > 0; i--) {
             nim[i] = nim[i - 1];
             nama[i] = nama[i - 1];
         }
-        nim[0] = inputNim;
-        nama[0] = inputNama;
+
+        nim[0] = n;
+        nama[0] = nm;
         count++;
-        System.out.println("Data berhasil ditambahkan di awal!");
     }
 
-    static void insertAtPosition(java.util.Scanner scanner) {
-        if (count >= 10) {
+    static void insertAtPosition() {
+        if (count == kapasitas) {
             System.out.println("Array penuh!");
             return;
         }
-        System.out.print("Masukkan posisi (0-" + count + "): ");
-        int pos = scanner.nextInt();
-        scanner.nextLine();
 
-        if (pos < 0 || pos > count) {
+        System.out.print("Masukkan posisi (0 - " + count  + "): ");
+        int pos = input.nextInt();
+        input.nextLine();
+
+        if (pos < 1 || pos > count + 1) {
             System.out.println("Posisi tidak valid!");
             return;
         }
 
-        System.out.print("Masukkan NIM: ");
-        String inputNim = scanner.nextLine();
-        System.out.print("Masukkan Nama: ");
-        String inputNama = scanner.nextLine();
+        System.out.print("Masukkan NIM  : ");
+        String n = input.nextLine();
+        System.out.print("Masukkan Nama : ");
+        String nm = input.nextLine();
 
-        for (int i = count; i > pos; i--) {
+        for (int i = count; i >= pos; i--) {
             nim[i] = nim[i - 1];
             nama[i] = nama[i - 1];
         }
-        nim[pos] = inputNim;
-        nama[pos] = inputNama;
+
+        nim[pos - 1] = n;
+        nama[pos - 1] = nm;
         count++;
-        System.out.println("Data berhasil ditambahkan di posisi " + pos + "!");
     }
 
-    static void insertAtEnd(java.util.Scanner scanner) {
-        if (count >= 10) {
+    static void insertEnd() {
+        if (count == kapasitas) {
             System.out.println("Array penuh!");
             return;
         }
-        System.out.print("Masukkan NIM: ");
-        String inputNim = scanner.nextLine();
-        System.out.print("Masukkan Nama: ");
-        String inputNama = scanner.nextLine();
 
-        nim[count] = inputNim;
-        nama[count] = inputNama;
+        System.out.print("Masukkan NIM  : ");
+        nim[count] = input.nextLine();
+        System.out.print("Masukkan Nama : ");
+        nama[count] = input.nextLine();
+
         count++;
-        System.out.println("Data berhasil ditambahkan di akhir!");
     }
 
-    static void deleteFromBeginning() {
+    // ================= DELETE =================
+
+    static void deleteBeginning() {
         if (count == 0) {
-            System.out.println("Array kosong!");
+            System.out.println("Data kosong!");
             return;
         }
+
         for (int i = 0; i < count - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
-        nim[count - 1] = null;
-        nama[count - 1] = null;
+
         count--;
-        System.out.println("Data di awal berhasil dihapus!");
     }
 
-    static void deleteFromPosition(java.util.Scanner scanner) {
+    static void deleteAtPosition() {
         if (count == 0) {
-            System.out.println("Array kosong!");
+            System.out.println("Data kosong!");
             return;
         }
-        System.out.print("Masukkan posisi yang ingin dihapus (0-" + (count - 1) + "): ");
-        int pos = scanner.nextInt();
 
-        if (pos < 0 || pos >= count) {
+        System.out.print("Masukkan posisi (1 - " + count + "): ");
+        int pos = input.nextInt();
+
+        if (pos < 1 || pos > count) {
             System.out.println("Posisi tidak valid!");
             return;
         }
 
-        for (int i = pos; i < count - 1; i++) {
+        for (int i = pos - 1; i < count - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
-        nim[count - 1] = null;
-        nama[count - 1] = null;
+
         count--;
-        System.out.println("Data di posisi " + pos + " berhasil dihapus!");
     }
 
-    static void deleteFromEnd() {
+    static void deleteEnd() {
         if (count == 0) {
-            System.out.println("Array kosong!");
+            System.out.println("Data kosong!");
             return;
         }
-        nim[count - 1] = null;
-        nama[count - 1] = null;
+
         count--;
-        System.out.println("Data di akhir berhasil dihapus!");
     }
 
-    static void deleteFirstOccurrence(java.util.Scanner scanner) {
+    static void deleteFirstOccurrence() {
         if (count == 0) {
-            System.out.println("Array kosong!");
+            System.out.println("Data kosong!");
             return;
         }
+
         System.out.print("Masukkan NIM yang ingin dihapus: ");
-        String searchNim = scanner.nextLine();
+        String target = input.nextLine();
 
-        int foundPos = -1;
+        int index = -1;
         for (int i = 0; i < count; i++) {
-            if (nim[i].equals(searchNim)) {
-                foundPos = i;
+            if (nim[i].equals(target)) {
+                index = i;
                 break;
             }
         }
 
-        if (foundPos == -1) {
+        if (index == -1) {
             System.out.println("Data tidak ditemukan!");
             return;
         }
 
-        for (int i = foundPos; i < count - 1; i++) {
+        for (int i = index; i < count - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
-        nim[count - 1] = null;
-        nama[count - 1] = null;
+
         count--;
-        System.out.println("Data dengan NIM " + searchNim + " berhasil dihapus!");
     }
+
+    // ================= SHOW =================
 
     static void showData() {
         if (count == 0) {
-            System.out.println("Array kosong!");
+            System.out.println("Data kosong!");
             return;
         }
-        System.out.println("\n=== DATA MAHASISWA ===");
-        System.out.println("Jumlah data: " + count);
-        System.out.println("No | NIM           | Nama");
-        System.out.println("---|---------------|---------------------");
+
+        System.out.println("\nData Mahasiswa:");
         for (int i = 0; i < count; i++) {
-            System.out.printf("%2d | %-8s | %s%n", i + 1, nim[i], nama[i]);
+            System.out.println((i + 1) + ". " + nim[i] + " - " + nama[i]);
         }
-        System.out.println();
     }
 }
