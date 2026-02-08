@@ -2,10 +2,10 @@ import java.util.Scanner;
 
 public class tugas_1 {
 
-    static final int kapasitas = 10;
-    static String[] nim = new String[kapasitas];
-    static String[] nama = new String[kapasitas];
-    static int count = 0;
+    static final int KAPASITAS = 10;
+    static String[] nim = new String[KAPASITAS];
+    static String[] nama = new String[KAPASITAS];
+    static int jumlahData = 0;
 
     static Scanner input = new Scanner(System.in);
 
@@ -52,23 +52,21 @@ public class tugas_1 {
     }
 
     static void menu() {
-        System.out.println("\n=== MENU DATA MAHASISWA ===");
-        System.out.println("1. Insert at beginning");
-        System.out.println("2. Insert at given position");
+        System.out.println("\n=== DATA MAHASISWA ===");
+        System.out.println("1. Insert at beginning (index 0)");
+        System.out.println("2. Insert at given position (index array)");
         System.out.println("3. Insert at end");
-        System.out.println("4. Delete from beginning");
-        System.out.println("5. Delete given position");
+        System.out.println("4. Delete from beginning (index 0)");
+        System.out.println("5. Delete given position (index array)");
         System.out.println("6. Delete from end");
-        System.out.println("7. Delete first occurrence");
+        System.out.println("7. Delete first occurrence (berdasarkan NIM)");
         System.out.println("8. Show data");
         System.out.println("9. Exit");
         System.out.print("Pilih menu: ");
     }
 
-    // ================= INSERT =================
-
     static void insertBeginning() {
-        if (count == kapasitas) {
+        if (jumlahData == KAPASITAS) {
             System.out.println("Array penuh!");
             return;
         }
@@ -78,28 +76,28 @@ public class tugas_1 {
         System.out.print("Masukkan Nama : ");
         String nm = input.nextLine();
 
-        for (int i = count; i > 0; i--) {
+        for (int i = jumlahData; i > 0; i--) {
             nim[i] = nim[i - 1];
             nama[i] = nama[i - 1];
         }
 
         nim[0] = n;
         nama[0] = nm;
-        count++;
+        jumlahData++;
     }
 
     static void insertAtPosition() {
-        if (count == kapasitas) {
+        if (jumlahData == KAPASITAS) {
             System.out.println("Array penuh!");
             return;
         }
 
-        System.out.print("Masukkan posisi (0 - " + count  + "): ");
+        System.out.print("Masukkan index (0 - " + jumlahData + "): ");
         int pos = input.nextInt();
         input.nextLine();
 
-        if (pos < 1 || pos > count + 1) {
-            System.out.println("Posisi tidak valid!");
+        if (pos < 0 || pos > jumlahData) {
+            System.out.println("Index tidak valid!");
             return;
         }
 
@@ -108,79 +106,78 @@ public class tugas_1 {
         System.out.print("Masukkan Nama : ");
         String nm = input.nextLine();
 
-        for (int i = count; i >= pos; i--) {
+        for (int i = jumlahData; i > pos; i--) {
             nim[i] = nim[i - 1];
             nama[i] = nama[i - 1];
         }
 
-        nim[pos - 1] = n;
-        nama[pos - 1] = nm;
-        count++;
+        nim[pos] = n;
+        nama[pos] = nm;
+        jumlahData++;
     }
 
     static void insertEnd() {
-        if (count == kapasitas) {
+        if (jumlahData == KAPASITAS) {
             System.out.println("Array penuh!");
             return;
         }
 
         System.out.print("Masukkan NIM  : ");
-        nim[count] = input.nextLine();
+        nim[jumlahData] = input.nextLine();
         System.out.print("Masukkan Nama : ");
-        nama[count] = input.nextLine();
+        nama[jumlahData] = input.nextLine();
 
-        count++;
+        jumlahData++;
     }
 
-    // ================= DELETE =================
-
     static void deleteBeginning() {
-        if (count == 0) {
+        if (jumlahData == 0) {
             System.out.println("Data kosong!");
             return;
         }
 
-        for (int i = 0; i < count - 1; i++) {
+        for (int i = 0; i < jumlahData - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
 
-        count--;
+        jumlahData--;
     }
 
     static void deleteAtPosition() {
-        if (count == 0) {
+        if (jumlahData == 0) {
             System.out.println("Data kosong!");
             return;
         }
 
-        System.out.print("Masukkan posisi (1 - " + count + "): ");
+        System.out.print("Masukkan index (0 - " + (jumlahData - 1) + "): ");
         int pos = input.nextInt();
+        input.nextLine();
 
-        if (pos < 1 || pos > count) {
-            System.out.println("Posisi tidak valid!");
+        if (pos < 0 || pos >= jumlahData) {
+            System.out.println("Index tidak valid!");
             return;
         }
 
-        for (int i = pos - 1; i < count - 1; i++) {
+        for (int i = pos; i < jumlahData - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
 
-        count--;
+        jumlahData--;
     }
 
     static void deleteEnd() {
-        if (count == 0) {
+        if (jumlahData == 0) {
             System.out.println("Data kosong!");
             return;
         }
 
-        count--;
+        jumlahData--;
     }
 
     static void deleteFirstOccurrence() {
-        if (count == 0) {
+        if (jumlahData == 0) {
             System.out.println("Data kosong!");
             return;
         }
@@ -189,7 +186,7 @@ public class tugas_1 {
         String target = input.nextLine();
 
         int index = -1;
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < jumlahData; i++) {
             if (nim[i].equals(target)) {
                 index = i;
                 break;
@@ -201,25 +198,23 @@ public class tugas_1 {
             return;
         }
 
-        for (int i = index; i < count - 1; i++) {
+        for (int i = index; i < jumlahData - 1; i++) {
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
 
-        count--;
+        jumlahData--;
     }
 
-    // ================= SHOW =================
-
     static void showData() {
-        if (count == 0) {
+        if (jumlahData == 0) {
             System.out.println("Data kosong!");
             return;
         }
 
-        System.out.println("\nData Mahasiswa:");
-        for (int i = 0; i < count; i++) {
-            System.out.println((i + 1) + ". " + nim[i] + " - " + nama[i]);
+        System.out.println("\nIndex | NIM        | Nama");
+        for (int i = 0; i < jumlahData; i++) {
+            System.out.println(i + "     | " + nim[i] + " | " + nama[i]);
         }
     }
 }
