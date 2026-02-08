@@ -53,16 +53,16 @@ public class tugas_1 {
 
     static void menu() {
         System.out.println("\n=== DATA MAHASISWA ===");
-        System.out.println("1. Insert at beginning (index 0)");
-        System.out.println("2. Insert at given position (index array)");
+        System.out.println("1. Insert at beginning");
+        System.out.println("2. Insert at given position");
         System.out.println("3. Insert at end");
-        System.out.println("4. Delete from beginning (index 0)");
-        System.out.println("5. Delete given position (index array)");
+        System.out.println("4. Delete from beginning");
+        System.out.println("5. Delete given position");
         System.out.println("6. Delete from end");
-        System.out.println("7. Delete first occurrence (berdasarkan NIM)");
+        System.out.println("7. Delete first occurrence");
         System.out.println("8. Show data");
         System.out.println("9. Exit");
-        System.out.print("Pilih menu: ");
+        System.out.print("Pilih Opsi: ");
     }
 
     static void insertBeginning() {
@@ -212,7 +212,7 @@ public class tugas_1 {
             return;
         }
 
-        System.out.println("\nIndex | NIM        | Nama");
+        System.out.println("\nIndex | NIM         | Nama");
         for (int i = 0; i < jumlahData; i++) {
             System.out.println(i + "     | " + nim[i] + " | " + nama[i]);
         }
