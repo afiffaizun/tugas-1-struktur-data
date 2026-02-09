@@ -16,7 +16,7 @@ def insert_awal():
     nm = input("Masukkan Nama : ")
 
     for i in range(jumlah_data, 0, -1): # Menggeser elemen ke kanan
-        nim[i] = nim[i - 1]   #disalin ke kotak sebelah kanan
+        nim[i] = nim[i - 1] 
         nama[i] = nama[i - 1]
 
     # Menyisipkan data baru di index ke 0
@@ -44,7 +44,6 @@ def insert_posisi():
         nim[i] = nim[i - 1]
         nama[i] = nama[i - 1]
 
-    # Menyisipkan data baru di index yg diminta
     nim[pos] = n
     nama[pos] = nm
     jumlah_data += 1
@@ -67,8 +66,8 @@ def delete_awal():
         print("Data kosong!")
         return
 
-    for i in range(jumlah_data - 1): # i = 0 sampai jumlah_data - 1
-        nim[i] = nim[i + 1]  # index 0 diisi dengan index 1 dan seterusnya
+    for i in range(jumlah_data - 1):
+        nim[i] = nim[i + 1]
         nama[i] = nama[i + 1]
 
     jumlah_data -= 1
@@ -101,7 +100,7 @@ def delete_akhir():
     jumlah_data -= 1
 
 
-def delete_berdasarkannim():
+def delete_pertama():
     global jumlah_data
     if jumlah_data == 0:
         print("Data kosong!")
@@ -165,7 +164,7 @@ while True:
         case "6":
             delete_akhir()
         case "7":
-            delete_berdasarkannim()
+            delete_pertama()
         case "8":
             show_data()
         case "9":
