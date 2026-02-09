@@ -12,18 +12,26 @@ Gunakan variabel count untuk menyimpan jumlah data yang terisi.
 - Delete first occurrence
 - Show data
 - Exit
-Program terus berjalan sampai user memilih Exit.
+Program terus berjalan sampai user memilih Exit menggunakan case condition.
+
 
 # Insert at beginning
 Buat fungsi insert at beginning.
 Data baru dimasukkan ke indeks 0, data lama digeser ke kanan.
 Jangan lupa cek kalau array sudah penuh dan tambahkan count setelah insert.
 
+logika pergeseran seperti ini
+
+for i in range(jumlah_data, 0, -1): 
+        nim[i] = nim[i - 1]   
+        nama[i] = nama[i - 1]
+
 
 #Insert at end
 Buat fungsi insert at end.
 Data langsung dimasukkan ke indeks count.
 Tambahkan validasi jika array penuh.
+
 
 #Insert at given position
 Buat fungsi insert at given position.
@@ -36,6 +44,10 @@ Tambahkan validasi posisi dan array penuh.
 Buat fungsi delete from beginning.
 Data di indeks 0 dihapus, data lain digeser ke kiri.
 Kurangi count setelah delete.
+
+for i in range(jumlah_data - 1): 
+        nim[i] = nim[i + 1]  
+        nama[i] = nama[i + 1]
 
 
 #Delete from end

@@ -1,9 +1,7 @@
-# ====== DEKLARASI ======
 kapasitas = 10
 nim = [None] * kapasitas
 nama = [None] * kapasitas
 jumlah_data = 0
-
 
 # Membuat  FUNCTION
 def insert_awal():
