@@ -1,141 +1,8 @@
-kapasitas = 10
-nim = [None] * kapasitas
-nama = [None] * kapasitas
-jumlah_data = 0
+KAPASITAS = 10
+nim = []
+nama = []
 
-# Membuat  FUNCTION
-def insert_awal():
-    global jumlah_data
-    if jumlah_data == kapasitas:
-        print("Array penuh!")
-        return
-
-    n = input("Masukkan NIM  : ")
-    nm = input("Masukkan Nama : ")
-
-    for i in range(jumlah_data, 0, -1): # Menggeser elemen ke kanan
-        nim[i] = nim[i - 1]   #disalin ke kotak sebelah kanan
-        nama[i] = nama[i - 1]
-
-    # Menyisipkan data baru di index ke 0
-    nim[0] = n
-    nama[0] = nm
-    jumlah_data += 1 #Menambah jumlah data
-
-
-def insert_posisi():
-    global jumlah_data
-    if jumlah_data == kapasitas: 
-        print("Array penuh!")
-        return
-
-    # Menentukan index ke berapa yg disisipkan
-    pos = int(input(f"Masukkan index (0 - {jumlah_data}): ")) 
-    if pos < 0 or pos > jumlah_data:
-        print("Index tidak valid!")
-        return
-
-    n = input("Masukkan NIM  : ")
-    nm = input("Masukkan Nama : ")
-
-    for i in range(jumlah_data, pos, -1):
-        nim[i] = nim[i - 1]
-        nama[i] = nama[i - 1]
-
-    # Menyisipkan data baru di index yg diminta
-    nim[pos] = n
-    nama[pos] = nm
-    jumlah_data += 1
-
-
-def insert_akhir():
-    global jumlah_data
-    if jumlah_data == kapasitas:
-        print("Array penuh!")
-        return
-
-    nim[jumlah_data] = input("Masukkan NIM  : ")
-    nama[jumlah_data] = input("Masukkan Nama : ")
-    jumlah_data += 1
-
-
-def delete_awal():
-    global jumlah_data
-    if jumlah_data == 0:
-        print("Data kosong!")
-        return
-
-    for i in range(jumlah_data - 1): # i = 0 sampai jumlah_data - 1
-        nim[i] = nim[i + 1]  # index 0 diisi dengan index 1 dan seterusnya
-        nama[i] = nama[i + 1]
-
-    jumlah_data -= 1
-
-
-def delete_posisi():
-    global jumlah_data
-    if jumlah_data == 0:
-        print("Data kosong!")
-        return
-
-    pos = int(input(f"Masukkan index (0 - {jumlah_data - 1}): "))
-    if pos < 0 or pos >= jumlah_data:
-        print("Index tidak valid!")
-        return
-
-    for i in range(pos, jumlah_data - 1):
-        nim[i] = nim[i + 1]
-        nama[i] = nama[i + 1]
-
-    jumlah_data -= 1
-
-
-def delete_akhir():
-    global jumlah_data
-    if jumlah_data == 0:
-        print("Data kosong!")
-        return
-
-    jumlah_data -= 1
-
-
-def delete_berdasarkannim():
-    global jumlah_data
-    if jumlah_data == 0:
-        print("Data kosong!")
-        return
-
-    target = input("Masukkan NIM yang ingin dihapus: ")
-    indeks = -1
-
-    for i in range(jumlah_data):
-        if nim[i] == target:
-            indeks = i
-            break
-
-    if indeks == -1:
-        print("Data tidak ditemukan!")
-        return
-
-    for i in range(indeks, jumlah_data - 1):
-        nim[i] = nim[i + 1]
-        nama[i] = nama[i + 1]
-
-    jumlah_data -= 1
-
-
-def show_data():
-    if jumlah_data == 0:
-        print("Data kosong!")
-        return
-
-    print("\nIndex | NIM         | Nama")
-    for i in range(jumlah_data):
-        print(i, "    |", nim[i], "|", nama[i])
-
-
-# ====== MAIN PROGRAM ======
-while True:
+def menu():
     print("\n=== DATA MAHASISWA ===")
     print("1. Insert at beginning")
     print("2. Insert at given position")
@@ -147,27 +14,133 @@ while True:
     print("8. Show data")
     print("9. Exit")
 
-    pilihan = input("Pilih Opsi: ")
+def insert_beginning():
+    if len(nim) == KAPASITAS:
+        print("Array penuh!")
+        return
 
-    match pilihan:
-        case "1":
-            insert_awal()
-        case "2":
-            insert_posisi()
-        case "3":
-            insert_akhir()
-        case "4":
-            delete_awal()
-        case "5":
-            delete_posisi()
-        case "6":
-            delete_akhir()
-        case "7":
-            delete_berdasarkannim()
-        case "8":
-            show_data()
-        case "9":
-            print("Keluar dari program...")
-            break
-        case _:
-            print("Pilihan tidak valid!")
+    n = input("Masukkan NIM  : ")
+    nm = input("Masukkan Nama : ")
+
+    nim.insert(0, n)
+    nama.insert(0, nm)
+
+def insert_at_position():
+    if len(nim) == KAPASITAS:
+        print("Array penuh!")
+        return
+
+    try:
+        pos = int(input(f"Masukkan index (0 - {len(nim)}): "))
+    except:
+        print("Input harus angka!")
+        return
+
+    if pos < 0 or pos > len(nim):
+        print("Index tidak valid!")
+        return
+
+    n = input("Masukkan NIM  : ")
+    nm = input("Masukkan Nama : ")
+
+    nim.insert(pos, n)
+    nama.insert(pos, nm)
+
+def insert_end():
+    if len(nim) == KAPASITAS:
+        print("Array penuh!")
+        return
+
+    n = input("Masukkan NIM  : ")
+    nm = input("Masukkan Nama : ")
+
+    nim.append(n)
+    nama.append(nm)
+
+def delete_beginning():
+    if len(nim) == 0:
+        print("Data kosong!")
+        return
+
+    nim.pop(0)
+    nama.pop(0)
+
+def delete_at_position():
+    if len(nim) == 0:
+        print("Data kosong!")
+        return
+
+    try:
+        pos = int(input(f"Masukkan index (0 - {len(nim)-1}): "))
+    except:
+        print("Input harus angka!")
+        return
+
+    if pos < 0 or pos >= len(nim):
+        print("Index tidak valid!")
+        return
+
+    nim.pop(pos)
+    nama.pop(pos)
+
+def delete_end():
+    if len(nim) == 0:
+        print("Data kosong!")
+        return
+
+    nim.pop()
+    nama.pop()
+
+def delete_first_occurrence():
+    if len(nim) == 0:
+        print("Data kosong!")
+        return
+
+    target = input("Masukkan NIM yang ingin dihapus: ")
+
+    if target in nim:
+        index = nim.index(target)
+        nim.pop(index)
+        nama.pop(index)
+    else:
+        print("Data tidak ditemukan!")
+
+def show_data():
+    if len(nim) == 0:
+        print("Data kosong!")
+        return
+
+    print("\nIndex | NIM         | Nama")
+    for i in range(len(nim)):
+        print(f"{i}     | {nim[i]} | {nama[i]}")
+
+# Program utama
+while True:
+    menu()
+    try:
+        pilihan = int(input("Pilih Opsi: "))
+    except:
+        print("Input harus angka!")
+        continue
+
+    if pilihan == 1:
+        insert_beginning()
+    elif pilihan == 2:
+        insert_at_position()
+    elif pilihan == 3:
+        insert_end()
+    elif pilihan == 4:
+        delete_beginning()
+    elif pilihan == 5:
+        delete_at_position()
+    elif pilihan == 6:
+        delete_end()
+    elif pilihan == 7:
+        delete_first_occurrence()
+    elif pilihan == 8:
+        show_data()
+    elif pilihan == 9:
+        print("Keluar dari program...")
+        break
+    else:
+        print("Pilihan tidak valid!")

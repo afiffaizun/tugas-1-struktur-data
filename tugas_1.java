@@ -76,7 +76,8 @@ public class tugas_1 {
         System.out.print("Masukkan Nama : ");
         String nm = input.nextLine();
 
-        for (int i = jumlahData; i > 0; i--) {
+        for (int i = jumlahData; i > 0; i--) { // i-- untuk mundur kebelakang 3,2,1
+            // geser kanan
             nim[i] = nim[i - 1];
             nama[i] = nama[i - 1];
         }
@@ -136,7 +137,7 @@ public class tugas_1 {
             return;
         }
 
-        for (int i = 0; i < jumlahData - 1; i++) {
+        for (int i = 0; i < jumlahData - 1; i++) { // i++ 1,2,3
             nim[i] = nim[i + 1];
             nama[i] = nama[i + 1];
         }
@@ -187,8 +188,8 @@ public class tugas_1 {
 
         int index = -1;
         for (int i = 0; i < jumlahData; i++) {
-            if (nim[i].equals(target)) {
-                index = i;
+            if (nim[i].equals(target)) { // membandingkan NIM di array dengan input
+                index = i; //index target
                 break;
             }
         }
